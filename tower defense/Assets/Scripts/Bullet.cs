@@ -6,7 +6,10 @@ public class Bullet : MonoBehaviour
 {
     private Transform target;
     public GameObject impactEffect;
+
     public float speed = 30f;
+
+    public int damage = 50;
 
     public void Seek(Transform _target){
         target = _target;
@@ -40,9 +43,19 @@ public class Bullet : MonoBehaviour
         GameObject explosionEffect = Instantiate(impactEffect, effectPosition, transform.rotation);
 
         // Optionally destroy the explosion effect after it finishes playing if it doesn't destroy itself
-        Destroy(explosionEffect, 5f); // Assumes the effect lasts 5 seconds, adjust as necessary
+        Destroy(explosionEffect, 3f); // Assumes the effect lasts 5 seconds, adjust as necessary
 
         Destroy(gameObject); // Destroy the bullet
+        DamageEnemy(target);
+        
+    }
+
+    void DamageEnemy(Transform enemy){
+        Enemy e = enemy.GetComponent<Enemy>();
+
+        if(e != null){
+            e.TakeDamage(damage);
+        }
     }
 
 }

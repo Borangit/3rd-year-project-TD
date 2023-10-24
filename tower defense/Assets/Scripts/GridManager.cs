@@ -8,7 +8,7 @@ public class GridManager : MonoBehaviour
     public int height = 8;
     public int minPathLenth = 20;
     public int objectChance = 30;
-    public int enemyCount = 10;
+
 
     public GameObject dirtPrefab;
     public GameObject grassPrefab;
@@ -40,6 +40,8 @@ public class GridManager : MonoBehaviour
 
         layPathCells(pathCells);
         layGrassCells();
+
+
         
     }
 

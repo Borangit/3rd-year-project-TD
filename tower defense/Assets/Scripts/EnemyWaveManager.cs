@@ -6,31 +6,48 @@ public class EnemyWaveManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public float spawnInterval = 1f;  // Interval between each enemy spawn
-    public int maxEnemyCount;
+    public float waveInterval = 10f;  // Interval between each wave
+    public int enemyPerWave;
+    public int waveN;
     public List<Vector2Int> pathCells;
+    public int hitpoints; // Default hitpoints value, you can adjust this in the inspector
+    public GameObject explosionEffect;
 
     private List<GameObject> activeEnemies = new List<GameObject>();
     private Dictionary<GameObject, int> enemyPathIndices = new Dictionary<GameObject, int>();
     private float spawnTimer;
+    private float waveTimer;
     private GridManager gridManager;
+
+    private int waveCount = 0;
+
 
     void Start()
     {
         spawnTimer = spawnInterval;  // Initialize the spawn timer to start spawning immediately
+        waveTimer = waveInterval;  // Initialize the wave timer to start spawning immediately
         gridManager = FindObjectOfType<GridManager>();
         pathCells = gridManager.pathCells;
-        maxEnemyCount = gridManager.enemyCount;
+  
 
     }
 
     void Update()
     {
-        // Handle enemy spawning
+        // Handle enemy spawning\
+        waveTimer += Time.deltaTime;
         spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval && activeEnemies.Count < maxEnemyCount)
+        if (spawnTimer >= spawnInterval && waveCount < enemyPerWave && waveTimer >= waveInterval && waveN > 0)
         {
             SpawnEnemy();
             spawnTimer = 0f;  // Reset spawn timer
+            waveCount++;
+        }
+        if (waveCount >= enemyPerWave)
+        {
+            waveCount = 0;
+            waveTimer = 0f;
+            waveN--;
         }
 
         // Move all active enemies along the path
@@ -62,6 +79,8 @@ public class EnemyWaveManager : MonoBehaviour
     public void SpawnEnemy()
     {
         GameObject enemy = Instantiate(enemyPrefab, new Vector3(pathCells[0].x, 0f, pathCells[0].y), Quaternion.identity);
+        enemy.GetComponent<Enemy>().setHitpoints(hitpoints);
+        enemy.GetComponent<Enemy>().setExplosionEffect(explosionEffect);
         activeEnemies.Add(enemy);
         enemyPathIndices.Add(enemy, 1);
     }
@@ -73,6 +92,6 @@ public class EnemyWaveManager : MonoBehaviour
 
     public void setEnemyCount(int newEnemyCount)
     {
-        maxEnemyCount = newEnemyCount;
+        enemyPerWave = newEnemyCount;
     }
 }

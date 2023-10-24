@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 696121865}
   - component: {fileID: 696121864}
+  - component: {fileID: 696121866}
   m_Layer: 0
   m_Name: gameManager
   m_TagString: Untagged
@@ -153,10 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 25
-  height: 12
-  minPathLenth: 50
-  objectChance: 90
-  enemyCount: 8
+  height: 10
+  minPathLenth: 30
+  objectChance: 70
   dirtPrefab: {fileID: 4130291809002841325, guid: 6abd2af49d2bc694b99724479a53bccb, type: 3}
   grassPrefab: {fileID: 407784320072161546, guid: e1bee4df71dd4c947bfe838617be7aec, type: 3}
   treePrefab: {fileID: 919132149155446097, guid: 073afe8f2ad3b224dafedb927b16ac0e, type: 3}
@@ -180,6 +180,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &696121866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696121863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e736256354ca74a9a011832f8922bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standardTurretPrefab: {fileID: 1998184289885577324, guid: fbba89cab6ca8b041b487241da9e265b, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,8 +410,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4737207355373081092, guid: 9f0c2e31f62ee3044ae928ecd46465cc, type: 3}
   spawnInterval: 1
-  maxEnemyCount: 0
+  waveInterval: 5
+  enemyPerWave: 3
+  waveN: 3
   pathCells: []
+  hitpoints: 3
+  explosionEffect: {fileID: 195045768696776591, guid: 51ffb64f998bc4c488e8803efe4f19c9, type: 3}
 --- !u!4 &2003405367
 Transform:
   m_ObjectHideFlags: 0
