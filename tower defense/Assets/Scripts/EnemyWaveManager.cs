@@ -48,6 +48,7 @@ public class EnemyWaveManager : MonoBehaviour
             waveCount = 0;
             waveTimer = 0f;
             waveN--;
+            
         }
 
         // Move all active enemies along the path
@@ -66,7 +67,7 @@ public class EnemyWaveManager : MonoBehaviour
                 enemy.transform.position = Vector3.MoveTowards(
                     enemy.transform.position, 
                     new Vector3(pathCells[nextPathCellIndex].x, 0f, pathCells[nextPathCellIndex].y), 
-                    Time.deltaTime * 3
+                    Time.deltaTime * 3f
                 );
                 if (enemy.transform.position == new Vector3(pathCells[nextPathCellIndex].x, 0f, pathCells[nextPathCellIndex].y))
                 {

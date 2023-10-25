@@ -18,14 +18,17 @@ public class Node : MonoBehaviour
 
 
     void OnMouseDown(){
-        if(turret != null){
-            Debug.Log("Can't build there! - TODO: Display on screen");
+        if(turret != null || CurrencyManager.startingCurrency < BuildManager.instance.GetTurretToBuild().GetComponent<Turret>().cost){
+            Debug.Log("Can't build!");
             return;
         }
         //Build a turret
         GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
         //spawn turret with y + 0.2
         turret = (GameObject)Instantiate(turretToBuild, transform.position + new Vector3(0,0.2f,0), transform.rotation);
+        //deduct money
+        CurrencyManager.startingCurrency -= turretToBuild.GetComponent<Turret>().cost;
+        
     }
     void OnMouseEnter(){
 

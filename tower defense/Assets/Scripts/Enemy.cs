@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour
         Vector3 effectPosition = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
         GameObject explosion = Instantiate(explosionEffect, effectPosition, transform.rotation);
         Destroy(gameObject); // Destroy the enemy
+        //add money
+        CurrencyManager.startingCurrency += 50;
         Destroy(explosion, 3f); // Assumes the effect lasts 5 seconds, adjust as necessary
     }
     public void setHitpoints(int hp)
